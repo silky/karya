@@ -11,6 +11,12 @@ cache:
   directories:
     - $HOME/.cabal
     - $HOME/.ghc
+    - build
+
+# pwd is /home/travis/build/elaforge/karya
+
+# adding /home/travis/build/elaforge/karya/elaforge/karya/build to cache
+# creating directory /home/travis/build/elaforge/karya/elaforge/karya/build
 
 before_cache:
   - rm -rf $HOME/.cabal/logs
@@ -76,7 +82,12 @@ before_install:
   - export cpus=2 latest_ghc=8.4.1
 
 install:
-  - ghc-pkg list
+  - ls
+  - mkdir -p build
+  - ls build
+  - ls build/*
+  - rm -f build/cache-test
+  # - ghc-pkg list
   # Disabled until I can get an up-to-date faust.
   # - cp data/all-deps.cabal karya.cabal
   # - cp data/cabal.config.all-deps cabal.config
@@ -109,12 +120,13 @@ script:
   # build.
   # - bin/mk tests-normal
 
+  - bin/mk build/test/RunTests
+
   # Run tests, but print output to stdout too.  This is so travis doesn't
   # think I wedged, and so if I did wedge, I can see where.
-  - bin/mk build/test/RunTests
-  - build/test/RunTests --noninteractive '^normal-' | tee build/test/output
-      | grep '^===>'
-  - test/check_output build/test/output
+  # - build/test/RunTests --noninteractive '^normal-' | tee build/test/output
+  #     | grep '^===>'
+  # - test/check_output build/test/output
 
   # I need to get all-deps working for this.
   # - |

@@ -276,7 +276,7 @@ UNSORTED
       . By far the easiest is to just omit play_cache from the typecheck
         build.
 
-    - I could cache build/ to reuse the build status.  But then I run into
+    * I could cache build/ to reuse the build status.  But then I run into
       the usual shake problems with disappeared files.
       . Actually this is likely a ghc bug.
       . Probably still worth it though.  I can clear the cache manually if
