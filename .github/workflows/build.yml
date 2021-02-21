@@ -28,6 +28,8 @@ jobs:
         run: |
           echo "::set-output name=date::$(/bin/date -u "+%Y%m%d")"
         shell: bash
+      # TODO I should include nixpkgs.lib.version in the key but the process
+      # substitution is so byzantine.  Why outputs.date?
       - uses: actions/cache@v2
         with:
           path: build

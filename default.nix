@@ -24,8 +24,9 @@ let
 
   ghcVersionDots = let ver = p: lib.hasPrefix p lib.version;
     in if ver "19.09" then "8.8.2" # ghc883 is not in 1909 yet
+    else if ver "20.09" then "8.8.4"
     # else if ver "20.09" then "8.8.3" # 8.8.4 causes recursion for some reason
-    else if ver "20.09" then "8.10.3"
+    # else if ver "20.09" then "8.10.3"
     else abort "unknown version ${lib.version}";
 
   ghcVersion = "ghc" + builtins.replaceStrings ["."] [""] ghcVersionDots;
